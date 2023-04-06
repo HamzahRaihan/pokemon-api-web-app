@@ -1,33 +1,27 @@
 import './App.css';
-import { useState } from 'react';
 import Pokemon from './components/Pokemon';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import { Route, Routes } from 'react-router-dom';
+import Detail from './pages/Detail';
+import PokemonSearch from './components/PokemonSearch';
 
 function App() {
-  const [pokemonName, setPokemonName] = useState('');
-
-  const searchPokemon = () => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((response) => {
-      console.log(response);
-    });
-  };
-
   return (
     <div className="App">
-      <div className="TitleSection">
-        <h1>Pokemon App</h1>
-        <input
-          type="text"
-          onChange={(event) => {
-            setPokemonName(event.target.value);
-          }}
-        />
-        <button onClick={searchPokemon}>Search Pokemon</button>
-      </div>
+      <Routes>
+        <Route path="/" element={<PokemonSearch />} />
+      </Routes>
       <div className="Pokedex">
-        <Pokemon />
+        <Routes>
+          <Route path="/" element={<Pokemon />} />
+          <Route path="/detail/">
+            <Route path=":id" element={<Detail />} />
+          </Route>
+        </Routes>
       </div>
+      <footer>
+        <div className="footer"></div>
+      </footer>
     </div>
   );
 }

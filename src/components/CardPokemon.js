@@ -1,17 +1,52 @@
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Col, Row, Container, Badge } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Loading from './Loading';
 
-export const CardPokemon = () => {
+export const CardPokemon = ({ pokemon, loading }) => {
+  console.log(pokemon);
   return (
     <div>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
+      <div className="wrapper">
+        <Container fluid>
+          <Row>
+            {loading ? (
+              <Loading />
+            ) : (
+              pokemon.map((item) => (
+                <Col className="pt-3" sm={6} md={3}>
+                  <Card>
+                    <Card.Img variant="top" src={item.sprites.front_default} style={{ width: '10rem' }} />
+                    <Card.Body>
+                      <Card.Title>
+                        {item.id}. {item.species.name}
+                      </Card.Title>
+                      <Card.Text>
+                        {item.abilities.map((ability) => (
+                          <Badge className="me-2" pill bg="danger" key={ability.ability.name}>
+                            {ability.ability.name}
+                          </Badge>
+                        ))}
+                      </Card.Text>
+                      <Button size="sm" variant="danger">
+                        <Link className="link" to={`/detail/${item.id}`}>
+                          Detail
+                        </Link>
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))
+            )}
+          </Row>
+          <div className="pt-2">
+            <Button className="me-2" variant="danger">
+              Previous
+            </Button>
+            <Button variant="danger">Next</Button>
+          </div>
+        </Container>
+      </div>
     </div>
   );
 };
