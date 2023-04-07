@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
 import { Col, Container, Image, Row } from 'react-bootstrap';
+import { Alert } from '@mui/material';
 
 const getPokemonDetailByID = async (id) => {
   const pokeID = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
@@ -40,22 +41,30 @@ export const Detail = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="wrapper">
-          <Container fluid>
-            <Row>
-              <Col sm={12} md={3}>
-                <div className="pokemon-picture">
-                  <Image className="pokemon-image" src={pokeImg.sprites.front_default} />
-                </div>
-              </Col>
-              <Col>
-                <div className="pokemon-desc">
-                  <h1>{pokeDetail.name}</h1>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        </div>
+        <>
+          {pokeDetail && pokeDetail.name ? (
+            <div className="wrapper pt-5">
+              <Container fluid>
+                <Row>
+                  <Col sm={12} md={3}>
+                    <div className="pokemon-picture">
+                      <Image className="pokemon-image" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeDetail.id}.png`} />
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className="pokemon-desc">
+                      <h1>{pokeDetail.name}</h1>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            </div>
+          ) : (
+            <Container>
+              <Alert severity="error">No Pokemon Found!</Alert>
+            </Container>
+          )}
+        </>
       )}
     </div>
   );

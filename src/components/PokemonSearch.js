@@ -4,6 +4,7 @@ import React from 'react';
 import Loading from './Loading';
 import { Badge, Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Alert } from '@mui/material';
 
 export const PokemonSearch = () => {
   const [pokemonName, setPokemonName] = useState('');
@@ -13,9 +14,9 @@ export const PokemonSearch = () => {
 
   const searchPokemon = () => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setPokemon(res.data);
-      console.log(res.data.abilities);
+      // console.log(res.data.abilities);
       setAbilities(res.data.abilities);
     });
     setLoading(true);
@@ -39,12 +40,12 @@ export const PokemonSearch = () => {
           <Row>
             {!loading ? (
               <div>
-                <h4>Your pokemon search results will be here</h4>
+                <Alert severity="info">Your Pokemon search results will be here!</Alert>
               </div>
             ) : (
               <>
                 {pokemon && pokemon.name ? (
-                  <Col className="pt-3" sm={6} md={3}>
+                  <Col sm={6} md={3}>
                     <Card>
                       <Card.Img variant="top" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} style={{ width: '10rem' }} />
                       <Card.Body>
@@ -68,7 +69,9 @@ export const PokemonSearch = () => {
                     </Card>
                   </Col>
                 ) : (
-                  <div>No data</div>
+                  <Container>
+                    <Alert severity="error">No Pokemon Found!</Alert>
+                  </Container>
                 )}
               </>
             )}

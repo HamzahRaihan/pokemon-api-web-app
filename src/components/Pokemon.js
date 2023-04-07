@@ -38,7 +38,7 @@ export const Pokemon = () => {
 
   return (
     <div>
-      <div className="wrapper">
+      <div className="wrapper-pokemon">
         <div className="pokemon-list">
           <CardPokemon pokemon={pokeData} loading={loading} />
         </div>

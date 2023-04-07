@@ -3,13 +3,13 @@
   --secondary-color: #5db9ff;
 }
 
-.App {
-  font-family: sans-serif;
+body {
+  min-height: 100vh;
+  margin: 0;
 }
 
-body {
-  margin: 0%;
-  padding: 0%;
+.App {
+  font-family: sans-serif;
 }
 
 .Loading {
@@ -27,6 +27,16 @@ body {
   color: white;
   align-items: center;
   flex-direction: column;
+}
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokedex {
+  flex: 1;
 }
 
 .TitleSection input {
@@ -74,8 +84,16 @@ body {
   color: white;
 }
 
+.results {
+  background-color: var(--secondary-color);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 .footer {
   margin-top: 10px;
   height: 100px;
-  background-color: grey;
+  background-color: var(--main-color);
+  bottom: 0;
+  width: 100%;
 }
