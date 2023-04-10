@@ -39,12 +39,6 @@ export const CardPokemon = ({ pokemon, loading }) => {
               ))
             )}
           </Row>
-          <div className="pt-2">
-            <Button className="me-2" variant="danger">
-              Previous
-            </Button>
-            <Button variant="danger">Next</Button>
-          </div>
         </Container>
       </div>
     </div>

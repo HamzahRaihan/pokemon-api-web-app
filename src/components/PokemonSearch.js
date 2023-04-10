@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
 import React from 'react';
-import Loading from './Loading';
-import { Badge, Button, Card, Col, Container, Row } from 'react-bootstrap';
+import { Badge, Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Alert } from '@mui/material';
+import { Alert, TextField } from '@mui/material';
+import icon from '../pokemon-icon.png';
 
 export const PokemonSearch = () => {
   const [pokemonName, setPokemonName] = useState('');
@@ -25,11 +25,14 @@ export const PokemonSearch = () => {
   return (
     <div>
       <div className="TitleSection">
-        <h1>Pokemon App</h1>
-        <input
+        <Image fluid src={icon} style={{ width: '200px', paddingBottom: '10px' }} />
+        <TextField
           type="text"
-          onChange={(event) => {
-            setPokemonName(event.target.value);
+          label="Pokemon Name"
+          variant="filled"
+          size="small"
+          onChange={(e) => {
+            setPokemonName(e.target.value);
           }}
         />
         <button onClick={searchPokemon}>Search Pokemon</button>

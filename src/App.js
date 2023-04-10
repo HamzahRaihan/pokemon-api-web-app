@@ -20,8 +20,8 @@ function App() {
             <Route path="/" element={<Pokemon />} />
             <Route path="/detail/">
               <Route path=":id" element={<Detail />} />
-              <Route path=":name" element={<Detail />} />
               <Route path="/detail/" element={<NotFound />} />
+              <Route path="/detail/undefined" element={<NotFound />} />
             </Route>
             <Route path="*" element={<div>Not Found</div>} />
           </Routes>

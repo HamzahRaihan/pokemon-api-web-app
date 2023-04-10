@@ -27,6 +27,7 @@ export const Pokemon = () => {
       const result = await axios.get(item.url);
       setPokeData((state) => {
         state = [...state, result.data];
+        state.sort((a, b) => (a.id > b.id ? 1 : -1));
         return state;
       });
     });
@@ -42,6 +43,27 @@ export const Pokemon = () => {
         <div className="pokemon-list">
           <CardPokemon pokemon={pokeData} loading={loading} />
         </div>
+        <Container fluid className="pt-2">
+          <Button
+            onClick={() => {
+              setPokeData([]);
+              setUrl(prevUrl);
+            }}
+            className="me-2"
+            variant="danger"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={() => {
+              setPokeData([]);
+              setUrl(nextUrl);
+            }}
+            variant="danger"
+          >
+            Next
+          </Button>
+        </Container>
       </div>
     </div>
   );

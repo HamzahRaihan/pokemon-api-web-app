@@ -3,16 +3,15 @@ import { styled, alpha, makeStyles } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link, useNavigate } from 'react-router-dom';
-import { Alert, Autocomplete, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
-import { Badge, Card, Col, Container, Row } from 'react-bootstrap';
+import ball from '../pokeball.png';
+import { Image } from 'react-bootstrap';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -65,7 +64,8 @@ export const NavigationBar = () => {
   const searchPokemon = () => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((res) => {
       setPokemonName(pokemonName);
-      navigate(`/detail/${pokemonName}`);
+      const pokemonid = res.data.id;
+      navigate(`/detail/${pokemonid}`);
       window.location.reload();
     });
   };
@@ -77,7 +77,7 @@ export const NavigationBar = () => {
           <Toolbar>
             <Typography variant="h6" noWrap component="a" sx={{ textDecoration: 'none', color: 'inherit', flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
               <Link style={{ color: 'inherit', textDecoration: 'none' }} to={'/'}>
-                POKEMON
+                <Image fluid src={ball} style={{ width: '50px' }} />
               </Link>
             </Typography>
             <Search>
