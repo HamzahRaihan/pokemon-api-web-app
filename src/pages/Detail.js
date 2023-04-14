@@ -5,34 +5,38 @@ import Loading from '../components/Loading';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 import { Alert } from '@mui/material';
 
-const getPokemonDetailByID = async (id) => {
+const getPokemonSpecies = async (id) => {
   const pokeID = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
-  console.log(pokeID.data);
-  return pokeID.data;
+  console.log(pokeID.data.flavor_text_entries);
+  const flavorText = pokeID.data.flavor_text_entries.find((entry) => entry.language.name === 'en');
+  return flavorText ? flavorText.flavor_text : '';
+  // return pokeID.data.flavor_text_entries;
 };
-const getPokemonImage = async (id) => {
-  const pokeImage = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-  console.log(pokeImage.data);
-  return pokeImage.data;
+const getPokemonDetailByID = async (id) => {
+  const pokeDetail = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+  console.log(pokeDetail.data);
+  return pokeDetail.data;
 };
 
 export const Detail = () => {
   const [pokeDetail, setPokeDetail] = useState({});
-  const [pokeImg, setPokeImg] = useState({});
+  const [pokeSpecies, setPokeSpecies] = useState([]);
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getPokemonImage(id).then((res) => {
+    getPokemonSpecies(id).then((res) => {
       setLoading(true);
-      setPokeImg(res);
+      setPokeSpecies(res);
       setLoading(false);
     });
   }, []);
 
   useEffect(() => {
     getPokemonDetailByID(id).then((res) => {
+      setLoading(true);
       setPokeDetail(res);
+      setLoading(false);
     });
   }, []);
 
@@ -53,7 +57,41 @@ export const Detail = () => {
                   </Col>
                   <Col>
                     <div className="pokemon-desc">
-                      <h1>{pokeDetail.name}</h1>
+                      <div className="pokename">
+                        <h1>{pokeDetail.name}</h1>
+                        <h5>{pokeSpecies}</h5>
+                      </div>
+                      <Row>
+                        <Col sm={4}>
+                          <div className="stats">
+                            <h5>Stats: </h5>
+                            {pokeDetail.stats.map((i) => (
+                              <p>
+                                {i.stat.name}: {i.base_stat}
+                              </p>
+                            ))}
+                            <p>height: {pokeDetail.height}</p>
+                            <p>weight: {pokeDetail.weight}</p>
+                          </div>
+                        </Col>
+                        <Col sm={4}>
+                          <div className="abilities">
+                            <h5>Abilities:</h5>
+                            {pokeDetail.abilities.map((i) => (
+                              <p>{i.ability.name}</p>
+                            ))}
+                            <div className="weakness">{}</div>
+                          </div>
+                        </Col>
+                        <Col>
+                          <div className="type">
+                            <h5>Types:</h5>
+                            {pokeDetail.types.map((i) => (
+                              <p>{i.type.name}</p>
+                            ))}
+                          </div>
+                        </Col>
+                      </Row>
                     </div>
                   </Col>
                 </Row>
