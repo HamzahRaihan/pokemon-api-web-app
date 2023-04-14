@@ -96,6 +96,10 @@ body {
   width: 100%;
 }
 
+.pokename::first-letter {
+  text-transform: capitalize;
+}
+
 /* mobile */
 @media (max-width: 700px) {
   .TitleSection input {

@@ -19,7 +19,7 @@ export const CardPokemon = ({ pokemon, loading }) => {
                     <Card.Img variant="top" src={item.sprites.front_default} style={{ width: '10rem' }} />
                     <Card.Body>
                       <Card.Title>
-                        {item.id}. {item.species.name}
+                        {item.id}. <span style={{ textTransform: 'capitalize' }}>{item.name}</span>
                       </Card.Title>
                       <Card.Text>
                         {item.abilities.map((ability) => (
