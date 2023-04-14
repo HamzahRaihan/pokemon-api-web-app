@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Loading from './Loading';
 
 export const CardPokemon = ({ pokemon, loading }) => {
-  console.log(pokemon);
+  // console.log(pokemon);
   return (
     <div>
       <div className="wrapper">

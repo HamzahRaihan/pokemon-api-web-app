@@ -7,14 +7,14 @@ import { Alert } from '@mui/material';
 
 const getPokemonSpecies = async (id) => {
   const pokeID = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
-  console.log(pokeID.data.flavor_text_entries);
+  // console.log(pokeID.data.flavor_text_entries);
   const flavorText = pokeID.data.flavor_text_entries.find((entry) => entry.language.name === 'en');
   return flavorText ? flavorText.flavor_text : '';
   // return pokeID.data.flavor_text_entries;
 };
 const getPokemonDetailByID = async (id) => {
   const pokeDetail = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-  console.log(pokeDetail.data);
+  // console.log(pokeDetail.data);
   return pokeDetail.data;
 };
 
