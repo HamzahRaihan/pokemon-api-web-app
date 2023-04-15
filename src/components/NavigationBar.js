@@ -62,7 +62,7 @@ export const NavigationBar = () => {
   const navigate = useNavigate();
 
   const searchPokemon = () => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((res) => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`).then((res) => {
       setPokemonName(pokemonName);
       const pokemonid = res.data.id;
       navigate(`/detail/${pokemonid}`);

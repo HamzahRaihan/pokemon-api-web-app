@@ -13,7 +13,7 @@ export const PokemonSearch = () => {
   const [loading, setLoading] = useState(false);
 
   const searchPokemon = () => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then((res) => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`).then((res) => {
       // console.log(res.data);
       setPokemon(res.data);
       // console.log(res.data.abilities);

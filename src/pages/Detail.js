@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
 import { Col, Container, Image, Row } from 'react-bootstrap';
-import { Alert } from '@mui/material';
+import { Alert, Button } from '@mui/material';
 
 const getPokemonSpecies = async (id) => {
   const pokeID = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`);
@@ -54,6 +54,11 @@ export const Detail = () => {
                     <div className="pokemon-picture">
                       <Image className="pokemon-image" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeDetail.id}.png`} />
                     </div>
+                    <Link className="link" to="/">
+                      <Button variant="contained" color="error" size="medium" style={{ width: '100%' }}>
+                        Back
+                      </Button>
+                    </Link>
                   </Col>
                   <Col>
                     <div className="pokemon-desc">
